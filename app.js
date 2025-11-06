@@ -11,6 +11,9 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(corsMiddleware());
 
+app.get('/status', (req, res) => {
+  res.status(200).send("OK");
+});
 
 const PORT = process.env.PORT || 1111;
 
