@@ -20,5 +20,9 @@
   "homepage": "https://github.com/Juankyyy/bitt-backend#readme",
   "dependencies": {
     "express": "5.1.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2"
   }
 }
