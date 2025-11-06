@@ -1,0 +1,24 @@
+{
+  "name": "bitt-backend",
+  "version": "1.0.0",
+  "description": "Social Media",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juankyyy/bitt-backend.git"
+  },
+  "keywords": [],
+  "author": "Juankyyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juankyyy/bitt-backend/issues"
+  },
+  "homepage": "https://github.com/Juankyyy/bitt-backend#readme",
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}
