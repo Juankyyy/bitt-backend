@@ -11,6 +11,16 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(corsMiddleware());
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: "This is the API of Bitt",
+    repositories: {
+      frontend: 'https://github.com/kemtch19/bitt-frontend',
+      backend: 'https://github.com/Juankyyy/bitt-backend'
+    }
+  });
+});
+
 app.get('/status', (req, res) => {
   res.status(200).send("OK");
 });
