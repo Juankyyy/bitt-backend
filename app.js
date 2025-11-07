@@ -12,13 +12,14 @@ app.use(helmet());
 app.use(corsMiddleware());
 
 app.get('/', (req, res) => {
-  res.status(200).json({
-    message: "This is the API of Bitt",
-    repositories: {
-      frontend: 'https://github.com/kemtch19/bitt-frontend',
-      backend: 'https://github.com/Juankyyy/bitt-backend'
-    }
-  });
+  res.status(200).type('html').send(`
+    <h1>this is the api of bitt</h1>
+    <h2>repositories:</h2>
+    <ul>
+      <li><strong>frontend:</strong> <a href="https://github.com/kemtch19/bitt-frontend">https://github.com/kemtch19/bitt-frontend</a></li>
+      <li><strong>backend:</strong> <a href="https://github.com/Juankyyy/bitt-backend">https://github.com/Juankyyy/bitt-backend</a></li>
+    </ul>
+  `);
 });
 
 app.get('/status', (req, res) => {
