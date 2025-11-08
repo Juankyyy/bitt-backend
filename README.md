@@ -17,9 +17,6 @@ Bitt es una plataforma de red social que permite a los usuarios interactuar medi
 
 - **Node.js** - Entorno de ejecución
 - **Express.js** - Framework web
-- **Helmet** - Seguridad HTTP
-- **CORS** - Manejo de políticas de origen cruzado
-- **Cookie Parser** - Gestión de cookies
 
 ## 🚀 Instalación
 
@@ -48,16 +45,3 @@ PORT=1111
 ## 🔧 Uso
 
 El servidor se ejecutará en `http://localhost:1111` (o el puerto configurado).
-
-Endpoint de estado disponible:
-```
-GET /status
-```
-
-## 👨‍💻 Autor
-
-**Juankyyy**
-
-## 📄 Licencia
-
-ISC
