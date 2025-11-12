@@ -4,12 +4,13 @@ import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 
 import { corsMiddleware } from './middlewares/cors.js';
+import { connectDB } from './db.js';
 
 const app = express();
+app.use(corsMiddleware());
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet());
-app.use(corsMiddleware());
 
 app.get('/', (req, res) => {
   res.status(200).type('html').send(`
@@ -25,6 +26,8 @@ app.get('/', (req, res) => {
 app.get('/status', (req, res) => {
   res.status(200).send("OK");
 });
+
+connectDB();
 
 const PORT = process.env.PORT || 1111;
 
