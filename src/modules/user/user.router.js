@@ -3,4 +3,6 @@ import { UserController } from "./user.controller.js";
 
 export const userRouter = Router();
 
-userRouter.get("/:id", UserController.getUserById);
+userRouter.get("/id/:id", UserController.getById);
+
+userRouter.get("/:username", UserController.getByUsername);
