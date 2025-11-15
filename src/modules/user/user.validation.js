@@ -12,6 +12,7 @@ export const userValidation = z.object({
     .trim(),
   username: z
     .string("El username debe ser un string")
+    .startsWith("@")
     .min(3, "El username debe tener al menos 3 carácteres")
     .max(50, "El username debe tener máximo 50 carácteres")
     .trim(),
@@ -21,11 +22,11 @@ export const userValidation = z.object({
     .max(70, "El email debe tener máximo 50 carácteres")
     .trim(),
   password: z.string("La contraseña debe ser un string").min(6).max(50).trim(),
-  avatar: z.url("La url del avatar debe ser un url válido"),
-  banner: z.url("La url del banner debe ser un url válido"),
-  bio: z.string().max(150),
-  location: z.string().max(30),
-  website: z.url("La url del website debe ser un url válido"),
+  avatar: z.url("La url del avatar debe ser un url válido").optional(),
+  banner: z.url("La url del banner debe ser un url válido").optional(),
+  bio: z.string().max(150).optional(),
+  location: z.string().max(30).optional(),
+  website: z.url("La url del website debe ser un url válido").optional(),
   following: z.array(objectId).optional().default([]).default([]),
   followers: z.array(objectId).optional().default([]).default([]),
   followingCount: z.number().min(0).optional().default(0),
