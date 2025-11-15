@@ -3,8 +3,8 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 
-import { corsMiddleware } from './src/middlewares/cors.js';
-import { connectDB } from './db.js';
+import { corsMiddleware } from './middlewares/cors.js';
+import { connectDB } from './config/db.js';
 
 const app = express();
 app.use(corsMiddleware());

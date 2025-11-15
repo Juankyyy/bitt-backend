@@ -6,6 +6,7 @@ const UserModel = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      minlength: 3,
     },
     username: {
       type: String,
@@ -24,7 +25,7 @@ const UserModel = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
+      minlength: 6,
       select: false,
     },
     avatar: {
@@ -51,7 +52,6 @@ const UserModel = new mongoose.Schema(
     },
     website: {
       type: String,
-      maxlength: 100,
       default: null,
     },
     following: [
