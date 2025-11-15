@@ -6,3 +6,5 @@ export const userRouter = Router();
 userRouter.get("/id/:id", UserController.getById);
 
 userRouter.get("/:username", UserController.getByUsername);
+
+userRouter.post("/", UserController.create)
