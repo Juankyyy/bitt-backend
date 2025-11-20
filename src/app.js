@@ -34,6 +34,7 @@ app.use("/users", userRouter);
 
 app.post("/login", UserController.login);
 app.post("/signup", UserController.create);
+app.post("/logout", UserController.logout);
 
 connectDB();
 

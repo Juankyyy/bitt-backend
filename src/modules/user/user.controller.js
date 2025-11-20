@@ -56,7 +56,7 @@ export class UserController {
         password,
       });
 
-      res.status(201).json({ message: "Usuario creado", user: user });
+      res.status(201).json({ message: "Usuario registrado", user: user });
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
@@ -84,5 +84,12 @@ export class UserController {
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
+  }
+
+  static async logout(req, res) {
+    res
+      .status(200)
+      .clearCookie("jwt")
+      .json({ message: "Se cerró la sesión" });
   }
 }
