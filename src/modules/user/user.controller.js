@@ -1,5 +1,6 @@
 import { UserService } from "./user.service.js";
 import { validateCreateUser } from "./user.validation.js";
+import jwt from "jsonwebtoken";
 
 export class UserController {
   static async getById(req, res) {
@@ -52,6 +53,30 @@ export class UserController {
       });
 
       res.status(201).json({ message: "Usuario creado", user: user });
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
+  }
+
+  static async login(req, res) {
+    try {
+      const { input, password } = req.body;
+
+      const user = await UserService.login({ input, password });
+
+      const token = jwt.sign(
+        { id: user._id, username: `@${user.username}`, email: user.email },
+        process.env.JWT_SECRET
+      );
+
+      res
+        .status(200)
+        .cookie("jwt", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "prod",
+          sameSite: process.env.NODE_ENV === "prod" ? "None" : "Lax",
+        })
+        .json({ message: "Login correcto", user: user });
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }

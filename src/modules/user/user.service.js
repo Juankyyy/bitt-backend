@@ -46,4 +46,17 @@ export class UserService {
     await newUser.save();
     return newUser;
   }
+
+  static async login({ input, password }) {
+    const user = await User.findOne({
+      $or: [{ username: `@${input}` }, { email: input }],
+    });
+
+    if (!user) throw new Error("User not found");
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) throw new Error("Password incorrect");
+
+    return user;
+  }
 }

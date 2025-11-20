@@ -7,4 +7,5 @@ userRouter.get("/id/:id", UserController.getById);
 
 userRouter.get("/:username", UserController.getByUsername);
 
-userRouter.post("/", UserController.create)
+// login
+// register in app
