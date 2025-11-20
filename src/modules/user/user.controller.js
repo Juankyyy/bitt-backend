@@ -19,7 +19,11 @@ export class UserController {
     try {
       const { username } = req.params;
 
-      const user = await UserService.getByUsername(username);
+      const formattedUsername = username.startsWith("@")
+        ? username
+        : `@${username}`;
+
+      const user = await UserService.getByUsername(formattedUsername);
 
       res.status(200).json(user);
     } catch (err) {
