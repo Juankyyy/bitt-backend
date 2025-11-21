@@ -59,4 +59,18 @@ export class UserService {
 
     return user;
   }
+
+  static async update(id, input) {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: input },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      throw new Error("User not found");
+    }
+
+    return updatedUser;
+  }
 }

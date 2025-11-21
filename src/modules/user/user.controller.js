@@ -1,5 +1,5 @@
 import { UserService } from "./user.service.js";
-import { validateCreateUser } from "./user.validation.js";
+import { validateCreateUser, validateUpdateUser } from "./user.validation.js";
 import jwt from "jsonwebtoken";
 
 export class UserController {
@@ -87,9 +87,30 @@ export class UserController {
   }
 
   static async logout(req, res) {
-    res
-      .status(200)
-      .clearCookie("jwt")
-      .json({ message: "Se cerró la sesión" });
+    res.status(200).clearCookie("jwt").json({ message: "Se cerró la sesión" });
+  }
+
+  static async update(req, res) {
+    // No actualiza password ni username
+    const { id } = req.params;
+    const input = req.body;
+
+    try {
+      const validation = validateUpdateUser(input);
+
+      if (!validation.success) {
+        return res
+          .status(400)
+          .json({ message: JSON.parse(validation.error.message) });
+      }
+
+      const updatedUser = await UserService.update(id, validation.data);
+
+      res
+        .status(200)
+        .json({ message: "Usuario actualizado", user: updatedUser });
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
   }
 }

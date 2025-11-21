@@ -25,7 +25,7 @@ export const userValidation = z.object({
   bio: z.string().max(150).optional(),
   location: z.string().max(30).optional(),
   website: z.url("La url del website debe ser un url válido").optional(),
-  following: z.array(objectId).optional().default([]),  
+  following: z.array(objectId).optional().default([]),
   followers: z.array(objectId).optional().default([]),
   followingCount: z.number().min(0).optional().default(0),
   followersCount: z.number().min(0).optional().default(0),
@@ -49,4 +49,17 @@ export const validateCreateUser = (input) => {
   });
 
   return UserCreateValidation.safeParse(input);
+};
+
+export const validateUpdateUser = (input) => {
+  const UserUpdateValidation = userValidation.omit({
+    following: true,
+    followers: true,
+    followingCount: true,
+    followersCount: true,
+    password: true,
+    username: true,
+  });
+
+  return UserUpdateValidation.partial().safeParse(input);
 };
