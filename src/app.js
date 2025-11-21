@@ -6,6 +6,7 @@ import "dotenv/config";
 import { corsMiddleware } from "./middlewares/cors.js";
 import { connectDB } from "./config/db.js";
 import { userRouter } from "./modules/user/user.router.js";
+import { UserController } from "./modules/user/user.controller.js";
 
 const app = express();
 app.use(corsMiddleware());
@@ -30,6 +31,10 @@ app.get("/status", (req, res) => {
 
 // routers
 app.use("/users", userRouter);
+
+app.post("/login", UserController.login);
+app.post("/signup", UserController.create);
+app.post("/logout", UserController.logout);
 
 connectDB();
 

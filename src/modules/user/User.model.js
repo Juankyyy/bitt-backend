@@ -26,7 +26,7 @@ const UserModel = new mongoose.Schema(
       required: true,
       trim: true,
       minlength: 6,
-      select: false,
+      // select: false,
     },
     avatar: {
       type: String,

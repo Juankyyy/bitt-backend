@@ -6,29 +6,27 @@ const objectId = z
 
 export const userValidation = z.object({
   name: z
-    .string("El username debe ser un string")
+    .string()
     .min(3, "El username debe tener al menos 3 carácteres")
-    .max(50, "El username debe tener máximo 50 carácteres")
     .trim(),
   username: z
-    .string("El username debe ser un string")
+    .string()
     .startsWith("@")
     .min(3, "El username debe tener al menos 3 carácteres")
-    .max(50, "El username debe tener máximo 50 carácteres")
     .trim(),
   email: z
+    .string()
     .email("El email debe ser un email válido")
     .min(10, "El email debe tener al menos 3 carácteres")
-    .max(70, "El email debe tener máximo 50 carácteres")
     .trim(),
-  password: z.string("La contraseña debe ser un string").min(6).max(50).trim(),
+  password: z.string().min(6).trim(),
   avatar: z.url("La url del avatar debe ser un url válido").optional(),
   banner: z.url("La url del banner debe ser un url válido").optional(),
   bio: z.string().max(150).optional(),
   location: z.string().max(30).optional(),
   website: z.url("La url del website debe ser un url válido").optional(),
-  following: z.array(objectId).optional().default([]).default([]),
-  followers: z.array(objectId).optional().default([]).default([]),
+  following: z.array(objectId).optional().default([]),
+  followers: z.array(objectId).optional().default([]),
   followingCount: z.number().min(0).optional().default(0),
   followersCount: z.number().min(0).optional().default(0),
 });
@@ -38,7 +36,7 @@ export const validateUser = (input) => {
 };
 
 export const validateCreateUser = (input) => {
-  const UserCreateValidation = UserCreateValidation.omit({
+  const UserCreateValidation = userValidation.omit({
     following: true,
     followers: true,
     followingCount: true,
@@ -51,4 +49,17 @@ export const validateCreateUser = (input) => {
   });
 
   return UserCreateValidation.safeParse(input);
+};
+
+export const validateUpdateUser = (input) => {
+  const UserUpdateValidation = userValidation.omit({
+    following: true,
+    followers: true,
+    followingCount: true,
+    followersCount: true,
+    password: true,
+    username: true,
+  });
+
+  return UserUpdateValidation.partial().safeParse(input);
 };
